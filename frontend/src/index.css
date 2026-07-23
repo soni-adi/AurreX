@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;font-size:15px}
+  body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;@apply bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-gray-100 min-h-screen}
+  input[type=number]{-moz-appearance:textfield;appearance:textfield}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  ::-webkit-scrollbar{width:4px;height:4px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{@apply bg-gray-300 dark:bg-zinc-700 rounded-full}
+  ::selection{@apply bg-amber-200 dark:bg-amber-800}
+}
+
+@layer components {
+  /* ── Inputs ── */
+  .input-base{@apply w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 dark:focus:border-amber-500 transition-all duration-150}
+  .input-sm{@apply input-base py-1.5 text-xs}
+  .input-base:disabled{@apply opacity-60 cursor-not-allowed bg-gray-50 dark:bg-zinc-900}
+
+  /* ── Buttons ── */
+  .btn{@apply inline-flex items-center justify-center gap-2 font-semibold text-sm rounded-xl transition-all duration-150 active:scale-[.97] disabled:opacity-50 disabled:cursor-not-allowed}
+  .btn-primary{@apply btn bg-gradient-to-b from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white shadow-sm shadow-amber-500/30 px-4 py-2}
+  .btn-secondary{@apply btn bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700 px-4 py-2}
+  .btn-danger{@apply btn bg-red-500 hover:bg-red-600 text-white px-4 py-2}
+  .btn-blue{@apply btn bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white shadow-sm shadow-blue-500/30 px-4 py-2}
+  .btn-violet{@apply btn bg-gradient-to-b from-violet-500 to-violet-600 hover:from-violet-400 hover:to-violet-500 text-white shadow-sm shadow-violet-500/30 px-4 py-2}
+  .btn-ghost{@apply btn text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2}
+  .btn-icon{@apply w-9 h-9 inline-flex items-center justify-center rounded-xl transition-all duration-150 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200}
+  .btn-sm{@apply text-xs px-3 py-1.5}
+
+  /* ── Cards ── */
+  .card{@apply bg-white dark:bg-zinc-900 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm}
+  .card-hover{@apply card hover:shadow-md hover:border-amber-200 dark:hover:border-amber-800/50 transition-all duration-200 cursor-pointer}
+  .section-card{@apply card p-5 mb-5}
+
+  /* ── Labels & Text ── */
+  .label{@apply block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 tracking-wide uppercase}
+  .page-title{@apply text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight}
+  .page-sub{@apply text-sm text-gray-500 dark:text-gray-400 mt-0.5}
+  .table-header{@apply text-xs font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-wider text-left}
+
+  /* ── Status Badges ── */
+  .badge{@apply inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full}
+  .badge-amber{@apply badge bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400}
+  .badge-green{@apply badge bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400}
+  .badge-blue{@apply badge bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400}
+  .badge-violet{@apply badge bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400}
+  .badge-red{@apply badge bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400}
+
+  /* ── Summary Boxes ── */
+  .summary-box{@apply bg-gradient-to-br from-amber-50 to-amber-100/60 dark:from-amber-900/20 dark:to-amber-900/5 border border-amber-200 dark:border-amber-800/50 rounded-2xl p-5}
+  .info-box{@apply bg-gray-50 dark:bg-zinc-800/60 border border-gray-200 dark:border-zinc-700 rounded-xl p-4}
+  .danger-box{@apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-xl p-4}
+  .staff-box{@apply bg-gradient-to-br from-blue-50 to-indigo-50/50 dark:from-blue-900/20 dark:to-indigo-900/10 border border-blue-200 dark:border-blue-800/50 rounded-2xl p-5}
+  .manager-box{@apply bg-gradient-to-br from-violet-50 to-purple-50/50 dark:from-violet-900/20 dark:to-purple-900/10 border border-violet-200 dark:border-violet-800/50 rounded-2xl p-5}
+
+  /* ── Table ── */
+  .data-table{@apply w-full text-sm}
+  .data-table thead tr{@apply bg-gray-50 dark:bg-zinc-800/80 border-b border-gray-200 dark:border-zinc-700}
+  .data-table th{@apply table-header py-3 px-4}
+  .data-table tbody tr{@apply border-b border-gray-100 dark:border-zinc-800 last:border-0 hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 transition-colors}
+  .data-table td{@apply py-2.5 px-4}
+  .data-table tfoot tr{@apply bg-amber-50/80 dark:bg-amber-900/10 border-t border-amber-200 dark:border-amber-800/40 font-bold text-xs}
+  .td-input{@apply input-sm w-full}
+  .td-num{@apply text-right font-mono text-sm}
+
+  /* ── Stat card ── */
+  .stat-card{@apply card p-5 flex items-center gap-4}
+  .stat-icon{@apply w-12 h-12 rounded-2xl flex items-center justify-center shrink-0}
+
+  /* ── CalcInput tooltip ── */
+  .calc-tooltip{@apply absolute bottom-full left-0 mb-1.5 bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg whitespace-nowrap z-50 shadow-xl pointer-events-none}
+  .calc-tooltip::after{content:'';@apply absolute top-full left-3 border-4 border-transparent border-t-zinc-900}
+
+  /* ── Sidebar nav ── */
+  .nav-item{@apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer}
+  .nav-active{@apply bg-amber-500 text-white shadow-sm shadow-amber-500/40}
+  .nav-idle{@apply text-zinc-400 hover:text-white hover:bg-zinc-800/60}
+  .nav-active-blue{@apply bg-blue-600 text-white shadow-sm shadow-blue-500/40}
+  .nav-idle-blue{@apply text-slate-400 hover:text-white hover:bg-slate-800/60}
+  .nav-active-violet{@apply bg-violet-600 text-white shadow-sm shadow-violet-500/40}
+  .nav-idle-violet{@apply text-violet-300 hover:text-white hover:bg-violet-800/40}
+}

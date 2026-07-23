@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment files — NEVER commit secrets
+.env
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# Uploads (user-generated content)
+backend/uploads/projects/*
+backend/uploads/connections/*
+backend/uploads/sets/*
+!backend/uploads/projects/.gitkeep
+!backend/uploads/connections/.gitkeep
+!backend/uploads/sets/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/

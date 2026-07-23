@@ -1,0 +1,16 @@
+const router=require('express').Router();
+const multer=require('multer');
+const path=require('path');
+const fs=require('fs');
+const Connection=require('../models/Connection');
+const {authenticate}=require('../middleware/auth');
+const storage=multer.diskStorage({destination:(req,file,cb)=>{const d=path.join(__dirname,'../uploads/connections');if(!fs.existsSync(d))fs.mkdirSync(d,{recursive:true});cb(null,d);},filename:(req,file,cb)=>cb(null,'conn-'+Date.now()+path.extname(file.originalname))});
+const upload=multer({storage,limits:{fileSize:5*1024*1024},fileFilter:(_,f,cb)=>f.mimetype.startsWith('image/')?cb(null,true):cb(new Error('Images only'))});
+router.use(authenticate);
+router.get('/',async(req,res)=>{try{const{type,search,connectionMode}=req.query;const q={user:req.user._id};if(type)q.type=type;if(search)q.name={$regex:search,$options:'i'};if(connectionMode)q.connectionMode=connectionMode;res.json({connections:await Connection.find(q).sort({updatedAt:-1})});}catch(e){res.status(500).json({error:e.message});}});
+router.post('/',async(req,res)=>{try{res.status(201).json({connection:await new Connection({...req.body,user:req.user._id}).save()});}catch(e){res.status(400).json({error:e.message});}});
+router.get('/:id',async(req,res)=>{try{const c=await Connection.findOne({_id:req.params.id,user:req.user._id});if(!c)return res.status(404).json({error:'Not found'});res.json({connection:c});}catch(e){res.status(500).json({error:e.message});}});
+router.put('/:id',async(req,res)=>{try{const c=await Connection.findOneAndUpdate({_id:req.params.id,user:req.user._id},{...req.body,user:req.user._id},{new:true,runValidators:true});if(!c)return res.status(404).json({error:'Not found'});res.json({connection:c});}catch(e){res.status(400).json({error:e.message});}});
+router.delete('/:id',async(req,res)=>{try{const c=await Connection.findOneAndDelete({_id:req.params.id,user:req.user._id});if(!c)return res.status(404).json({error:'Not found'});res.json({message:'Deleted'});}catch(e){res.status(500).json({error:e.message});}});
+router.post('/:id/image',upload.single('image'),async(req,res)=>{try{if(!req.file)return res.status(400).json({error:'No image'});const url='/uploads/connections/'+req.file.filename;await Connection.findOneAndUpdate({_id:req.params.id,user:req.user._id},{image:url});res.json({imageUrl:url});}catch(e){res.status(500).json({error:e.message});}});
+module.exports=router;
